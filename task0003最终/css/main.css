@@ -1,0 +1,317 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-size: 14px;
+    /*height: 100%;*/
+}
+ul {
+    list-style-type: none;
+}
+li,a {
+    text-decoration: none;
+    list-style: none;
+}
+p {
+    color: #000;
+}
+em {
+    font-style: normal;
+
+}
+
+
+ /*公共样式*/
+
+#page {
+    height: 100%;
+    width: 100%;
+    /*background-color: red;*/
+    /*position: relative;*/
+    min-width: 760px;
+    /*min-height: 620px;*/
+}
+.header {
+    width: 100%;
+    height: 60px;
+    background-color: #DDD;
+    border-bottom: 1px solid #ccc;
+    /*zoom: 1;#D3C5DE*/
+}
+.header p {
+    display: inline-block;
+    position: relative;
+    top: 25%;
+    left: 1%;
+    font-size: 22px;
+    font-weight: bold;
+    color: #666;
+}
+.footer {
+    height: 0px;
+}
+#body_layout {
+     /*padding: 0 230px 0 190px;*/
+     /*overflow: scroll;*/
+    clear: both;
+    /*height: 100%;*/
+}
+
+/*main */
+#main-wrap {    
+    /*margin: 0 230px 0 190px;*/
+    margin-left: 462px; 
+}
+.main {        
+    float: left;       
+    width: 100%;   
+    background-color: #fff;
+    /*height: 540px;*/
+ }  
+.task_title {
+    position: relative;
+    height: 50px;
+    background-color: #F2F2F2;
+}
+.task_name {
+    position: absolute;
+    right: 20px;
+    top: 5px; 
+}
+#sub_nav .visit {
+        color: #398E9B;
+}
+#main-wrap h5 {
+    height: 50px;
+    /*font-size: 16px;*/
+    padding-left: 20px;
+    line-height: 50px;
+    font-weight: normal;
+    background-color: #FAFAEE;
+}
+#main-wrap h4 {
+    height: 50px;
+    /*font-size: 16px;*/
+    padding-left: 20px;
+    line-height: 50px;
+    font-weight: normal;
+    /*background-color: #FAFAEE;*/
+}
+#main-wrap p {
+    padding-left: 20px;
+    line-height: 50px;
+    font-weight: normal;
+    margin-top: 5px;
+}
+#Add {
+    position: absolute;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.7;
+    z-index:2;
+}
+#Add > div {
+    display: none;
+    position: absolute;
+    z-index: 3;
+    top: 50%;
+    left: 50%;
+    margin-left: -200px;
+    margin-top: -200px;
+    width: 300px;
+    height: 100px;
+    padding: 50px 20px 20px 20px;
+    background-color: #fff;
+    color: #000;
+}
+#Add > div label {
+    color: #000;
+    font-size: 16px;
+    font-weight: bold;
+}
+#Add > div label input {
+    border-color: #000;
+    display: inline-block;
+    height: 30px;
+    width: 170px;
+}
+#addtask {
+    display: none;
+}
+#addtask p {
+    padding: 20px 0 0 20px;
+}
+#addtask input,
+#addtask textarea {
+    width: 170px;
+    height: 25px;
+}
+textarea#addcontent {
+    width: 350px;
+    height: 150px;
+}
+#addtask  #submit,
+#addtask  #cancel {
+    width: 50px;
+    background-color: #F2F2E0;
+    border: 1px solid #ccc;
+}
+.form_p {
+    /*padding-left: 30px;*/
+    position: relative;
+    left: 83px;
+}
+
+ /*sub 任务分类列表样式*/
+.sub {       
+    float: left;  
+    position: relative;
+    /*left: 190px;      */
+    width: 230px;        
+    margin-left: -100%;
+    /*background-color: #DEC5FC;*/
+    /*background-color: #AE81FF;*/
+    background-color: #F2F2F2;
+    /*min-height: 300px;*/
+    overflow: auto;
+    }   
+ul#left_nav {
+    padding: 0 0 0 10px;
+}
+#left_nav li {
+    margin-bottom: 20px;
+}
+ul#sub_nav li{
+    padding: 0 0 10px 25px;
+}
+ul#sub_nav li:hover .imooc_none{
+    position: relative;
+    left: 20px;
+    display: inline-block;
+}
+ul#sub_nav li em:hover {
+    color: #7E7E48;  
+}
+ul#sub_nav li > ul li{
+    padding:10px 0 0 20px;
+}
+.addItems,
+#addTasks {
+    position: absolute;
+    bottom: 0;
+    width: 228px;
+    height: 40px;
+    border: 1px solid #CCC;
+    border-left: 0;
+    background-color: #EEE;
+}
+.addItems a,
+#addTasks a {
+     color: #000;
+     font-size: 14px;
+     line-height: 40px;
+     padding-left: 15px;
+
+}
+.addItems a > span,
+#addTasks a > span {
+    position: relative;
+    top: 5px;
+}
+
+/*extra中间列任务列表样式*/
+.extra {        
+    float: left; 
+    position: relative;
+    right: -230px;       
+    width: 230px;        
+    margin-left: -100%;  
+    background-color: #fff; 
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    border-top: 0 ;
+    /*overflow: scroll;*/
+ }
+.extra li {
+    /*height: 26px;*/
+    line-height: 26px;
+    background-color: #fff;
+}
+.extra .extra_menu {
+    height: 43px;
+    background-color: #EEE;
+    border-bottom: 1px solid #ccc;
+    padding-left: 10px;
+ }
+ .extra button {
+    background-color: #fcfcfc;
+    display :inline;
+    position: relative;
+    padding: 3px 8px 3px 8px;
+    border: 1px solid #ccc;
+    margin-top: 12px;
+    text-align: center;
+    font-size: 12px;
+ }
+ .extra .now {
+    background-color: #7CCBD6;
+ }
+.extra .dateItems {
+    background-color: #FAFAEE;
+    /*padding-left: 20px; */
+}
+
+ /*icon字符样式*/
+
+@font-face {
+    font-family: 'icomoon';
+    src:url('../img/icomoon.eot?-e1n477');
+    src:url('../img/icomoon.eot?#iefix-e1n477') format('embedded-opentype'),
+        url('../img/icomoon.woff?-e1n477') format('woff'),
+        url('../img/icomoon.ttf?-e1n477') format('truetype'),
+        url('../img/icomoon.svg?-e1n477#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.imooc {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    font-size: 22px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.imooc_nav {
+    font-size: 14px;
+    margin-right: 10px;
+}
+.imooc_none {
+    display: none;
+    font-size: 12px;
+    margin-right: 10px;
+}
+.imooc_task {
+   
+}
+
+
+/*媒体查询*/
+/*@media screen and (min-width: 600px) {
+    nav {
+        width: 25%;
+        float: left;
+    }
+    section {
+        margin-left: 25%;
+    }
+}
+@media screen and (max-width: 599px) {
+    nav li {
+        display: inline;
+    }
+}*/
