@@ -2,9 +2,11 @@
 ###任务三记录
 ***5.17提交第一次***
   [收获分享]：
+  </br>
   1.本地存储
+  </br>
   localStorage的使用。
-  ----------
+</br>
 var storage = window.localStorage;
 storage.setItem("a",5);           //存储一个键值对
 storage.setItem('b',"running");   //修改一个键值
@@ -17,10 +19,13 @@ function showStorage(){           //循环显示localStorage里的键值对
    }
 }
 //json转换
+</br>
 var person = {'name': 'rainman', 'age': 24};
 localStorage.setItem("me", JSON.stringify(person));
 console.log(JSON.parse(localStorage.getItem('me')).name);
+</br>
 2.事件代理
+</br>
 <ul id="myLinks">
     <li id="one">one</li>
     <li id="two">two</li>   
@@ -43,9 +48,11 @@ EventUtil.addHandler(list, "click", function(event) {
             break;   
     }
 });
+</br>
 事件代理还是很有用滴~~
+</br>
 ***6.13更新第一次  ***
-鉴于提交的时候任务按照时间升序或降序排序没有实现
-以及某次手抖发现了bug
-特更新一次~~
+鉴于提交的时候任务按照时间升序或降序排序没有实现</br>
+以及某次手抖发现了bug</br>
+特更新一次~~</br>
 
