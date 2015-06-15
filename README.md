@@ -1,11 +1,10 @@
 # task003
-=====================
 ###任务三记录
----------------------------------
 ***5.17提交第一次***
   [收获分享]：
   1.本地存储
   localStorage的使用。
+  ----------
 var storage = window.localStorage;
 storage.setItem("a",5);           //存储一个键值对
 storage.setItem('b',"running");   //修改一个键值
