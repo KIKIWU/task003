@@ -26,11 +26,15 @@ console.log(JSON.parse(localStorage.getItem('me')).name);</br>
 </br>
 2.事件代理
 </br>
-&nbsp;&nbsp;&nbsp;&nbsp;<ul id="myLinks">
-&nbsp;&nbsp;&nbsp;&nbsp;    <li id="one">one</li>
-&nbsp;&nbsp;&nbsp;&nbsp;    <li id="two">two</li>   
-&nbsp;&nbsp;&nbsp;&nbsp;    <li id="hi">hello</li>
-&nbsp;&nbsp;&nbsp;&nbsp;</ul>
+<ul id="myLinks">
+
+   <li id="one">one</li>
+   
+   <li id="two">two</li>  
+   
+   <li id="hi">hello</li>
+   
+</ul>
 
 var list = document.getElementById("myLinks");</br>
 EventUtil.addHandler(list, "click", function(event) {
