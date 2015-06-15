@@ -63,7 +63,6 @@ function additems() {
 	var editicon = $("#edit");
 	var okicon = $("#ok");
 	var flag = 0; //新增分类使用的标志
-	// var tag = []; //新增任务
 	var newvalue = '';
 	var index = 0;
 	var arr = [];
@@ -102,10 +101,13 @@ function additems() {
 		ul.innerHTML = '';
 		btn.className = "now";
 		btn.style.backgroundColor = '#7CCBD6';
+		var value = flag.innerHTML;
+		value = value.split('(')[0];
+		(value == '默认分类') ? value = "define": value;
 		if (btn.innerHTML == '完成') {
 			var key = JSON.parse(localStorage.getItem('storage'));
 			for (var j in key) {
-				if (flag.innerHTML == j) {
+				if (value == j) {
 					for (var k in key[j]) {
 						if (key[j][k].bln == true) {
 							var li = document.createElement("li");
@@ -120,12 +122,11 @@ function additems() {
 						}
 					}
 				}
-
 			}
 		} else if (btn.innerHTML == '未完成') {
 			var key = JSON.parse(localStorage.getItem('storage'));
 			for (var j in key) {
-				if (flag.innerHTML == j) {
+				if (value == j) {
 					for (var k in key[j]) {
 						if (key[j][k].bln == false) {
 							var li = document.createElement("li");
@@ -140,12 +141,11 @@ function additems() {
 						}
 					}
 				}
-
 			}
 		} else if (btn.innerHTML == '所有') {
 			var key = JSON.parse(localStorage.getItem('storage'));
 			for (var j in key) {
-				if (flag.innerHTML == j) {
+				if (value == j) {
 					for (var k in key[j]) {
 						var li = document.createElement("li");
 						var oul = document.createElement("ul");
@@ -158,11 +158,8 @@ function additems() {
 						oli.innerHTML = key[j][k].title;
 					}
 				}
-
 			}
 		}
-
-
 	}
 	EventUtil.addHandler(okicon, "click", function(event) {
 		var value = $("h4").innerHTML;
@@ -191,6 +188,7 @@ function additems() {
 		li.appendChild(oul);
 		oul.appendChild(oli);
 		oli.innerHTML = title;
+
 		if (flag == 0) {
 			$("#define").innerHTML = $("#define").innerHTML + '<li>' + '<span class="imooc imooc_nav">&#xf016;</span>' + '<em>' + title + '</em>' + '</li>';
 			storagenews('storage', 'define', title, {
@@ -198,11 +196,23 @@ function additems() {
 			});
 		} else {
 
-			for (var i = 0; i < localStorage.length; i++) {
-				var key = JSON.parse(localStorage.getItem(localStorage.key(i)));
-				for (var j in key) {
-					if (j == flag.innerHTML) {
-						flag.parentNode.childNodes[4].innerHTML = flag.parentNode.childNodes[4].innerHTML + '<li>' + '<span class="imooc imooc_nav">' + '&#xf016;' + '</span>' + title + '</li>';
+			var a = flag.innerHTML.split('(')[0];
+			if (a == '默认分类') {
+				$("#define").innerHTML = $("#define").innerHTML + '<li>' + '<span class="imooc imooc_nav">&#xf016;</span>' + '<em>' + title + '</em>' + '</li>';
+				storagenews('storage', 'define', title, {
+					title, date, content, bln
+				});
+			}
+			var key = JSON.parse(localStorage.getItem('storage'));
+			console.log(flag.parentNode.childNodes);
+			for (var j in key) {
+				if (j == a) {
+					if (!flag.parentNode.childNodes[3]) {
+						var ul = document.createElement("ul");
+						flag.parentNode.appendChild(ul);
+					}
+					if (flag.parentNode.childNodes[3]) {
+						flag.parentNode.childNodes[3].innerHTML = flag.parentNode.childNodes[3].innerHTML + '<li>' + '<span class="imooc imooc_nav">' + '&#xf016;' + '</span>' + title + '</li>';
 						storagenews('storage', j, title, {
 							title, date, content, bln
 						});
@@ -222,67 +232,88 @@ function additems() {
 	EventUtil.addHandler("sub_nav", "click", addfn);
 
 	function addfn(event) {
-			var index = event.target.parentNode.parentNode.children;
-			var tag = []; //新增任务
+		var index = event.target.parentNode.parentNode.children;
+		var tag = []; //新增任务
+		var time = [];
+		var sp = 0;
+		var p = event.target.parentNode;
+		for (var i = 0; i < index.length; i++) {
 
-			var p = event.target.parentNode;
-			for (var i = 0; i < index.length; i++) {
-
-				if (index[i] == p) {
-					break;
-				}
+			if (index[i] == p) {
+				break;
 			}
-			flag = event.target;
+		}
+		flag = event.target;
 
-			if (flag.className == "imooc imooc_none") { //删除呀删除
-				var node = flag.parentNode.childNodes[1];
-				var parent = flag.parentNode.parentNode;
-				parent.removeChild(flag.parentNode);
-				for (var i = 0; i < localStorage.length; i++) {
-					var key = JSON.parse(localStorage.getItem(localStorage.key(i)));
-					for (var j in key) {
-						if (j == node.innerHTML) {
-							clearStorage(j);
-						}
-					}
-				}
-			}
-			var ele = getElementsByClassName("visit");
-			for (var i = 0; i < ele.length; i++) {
-				ele[i].style.color = "#000";
-			}
-
-			flag.className = flag.className + "visit";
-			flag.style.color = '#398E9B';
-			var value = flag.innerHTML;
-			(value == '默认分类') ? value = "define": value;
-			var ul = $("#detail");
-			ul.innerHTML = '';
+		if (flag.className == "imooc imooc_none") { //删除呀删除
+			var node = flag.parentNode.childNodes[1];
+			var parent = flag.parentNode.parentNode;
+			parent.removeChild(flag.parentNode);
 			for (var i = 0; i < localStorage.length; i++) {
 				var key = JSON.parse(localStorage.getItem(localStorage.key(i)));
 				for (var j in key) {
-					if (value == j) {
-						tag[0] = key[j];
-						tag[1] = j;
-						for (var k in key[j]) {
-
-							var li = document.createElement("li");
-							var oul = document.createElement("ul");
-							var oli = document.createElement("li");
-							li.setAttribute("class", "dateItems");
-							li.innerHTML = tag[0][k].date;
-							ul.appendChild(li);
-							li.appendChild(oul);
-							oul.appendChild(oli);
-							oli.innerHTML = tag[0][k].title;
-						}
+					if (j == node.innerHTML) {
+						clearStorage(j);
 					}
-
 				}
 			}
-
 		}
-		//新增分类点击
+		var ele = getElementsByClassName("visit");
+		for (var i = 0; i < ele.length; i++) {
+			ele[i].style.color = "#000";
+		}
+
+		flag.className = flag.className + "visit";
+		flag.style.color = '#398E9B';
+		var value = flag.innerHTML;
+		value = value.split('(')[0];
+		(value == '默认分类') ? value = "define": value;
+		var ul = $("#detail");
+		ul.innerHTML = '';
+		var key = JSON.parse(localStorage.getItem('storage'));
+		for (var j in key) {
+			if (value == j) {
+				tag[0] = key[j];
+				tag[1] = j;
+				for (var k in key[j]) {
+					time.push(tag[0][k].date);
+					time.sort();
+				}
+				for (var p = 0; p < time.length; p++) {
+					for (var q = p + 1; q < time.length; q++) {
+						if (time[p] == time[q]) {
+							time.splice(q, 1);
+							q--;
+						}
+					}
+				}
+
+				for (var i = 0; i < time.length; i++) {
+					for (var k in key[j]) {
+
+						if (time[i] == tag[0][k].date) {
+							if (sp == tag[0][k].date) {
+								oul.innerHTML = oul.innerHTML + '<li>' + tag[0][k].title + '</li>';
+							} else {
+
+								var li = document.createElement("li");
+								var oul = document.createElement("ul");
+								var oli = document.createElement("li");
+								li.setAttribute("class", "dateItems");
+								li.innerHTML = tag[0][k].date;
+								ul.appendChild(li);
+								li.appendChild(oul);
+								oul.appendChild(oli);
+								oli.innerHTML = tag[0][k].title;
+								sp = tag[0][k].date;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	//新增分类点击
 	EventUtil.addHandler(addItem, "click", function() {
 		add.style.display = 'block';
 		add.children[0].style.display = 'block';
@@ -361,7 +392,6 @@ function additems() {
 	//小任务点击函数
 	EventUtil.addHandler(sub, "click", function() {
 		var tag = []; //新增任务
-
 		event = EventUtil.getEvent(event);
 		var target = EventUtil.getTarget(event);
 		var ul = $("#detail");
@@ -386,7 +416,6 @@ function additems() {
 						}
 					}
 				}
-
 			} else {
 				for (var i = 0; i < localStorage.length; i++) {
 					var key = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -403,7 +432,6 @@ function additems() {
 				var oul = document.createElement("ul");
 				var oli = document.createElement("li");
 				li.setAttribute("class", "dateItems");
-
 				li.innerHTML = tag[0].date;
 				ul.appendChild(li);
 				li.appendChild(oul);
@@ -433,7 +461,6 @@ function seek(taskname) {
 				return key[j];
 			}
 		}
-
 	}
 	return false;
 }
@@ -457,7 +484,6 @@ function storagenews(index, message, type, obj) {
 		o[message] = {};
 		localStorage.setItem(index, JSON.stringify(o));
 	}
-
 }
 
 function clearStorage(task) {
@@ -490,15 +516,16 @@ function showStorage() {
 	var key = JSON.parse(localStorage.getItem('storage'));
 	for (var j in key) {
 		number[m] = 0;
+		number[m + 1] = 0;
 		if (j != 'define') {
+
 			sub_nav.innerHTML = sub_nav.innerHTML + '<li class="nav">' + '<span class="imooc imooc_nav">&#xf07c;</span>' + '<em>' + j + '</em>' + '<span class="imooc imooc_none">&#xf00d;</span>' + '</li>';
 		}
-		if (key.hasOwnProperty(j)) size++;
-
 		for (var k in key[j]) {
 			sum++;
 			if (j == 'define') {
-				number[0] ++;
+				number[0]++;
+				$("#sub_nav").getElementsByTagName("em")[0].innerHTML = $("#sub_nav").getElementsByTagName("em")[0].innerHTML.split('(')[0];
 				$("#sub_nav").getElementsByTagName("em")[0].innerHTML += '(' + number[0] + ')';
 				$("#define").innerHTML = $("#define").innerHTML + '<li>' + '<span class="imooc imooc_nav">' + '&#xf016;' + '</span>' + '<em>' + k + '</em>' + '<span class="imooc imooc_none">&#xf00d;</span>' + '</li>';
 			} else {
@@ -510,44 +537,45 @@ function showStorage() {
 					ul.innerHTML = '<li>' + '<span class="imooc imooc_nav">' + '&#xf016;' + '</span>' + '<em>' + k + '</em>' + '<span class="imooc imooc_none">&#xf00d;</span>' + '</li>';
 					chd.appendChild(ul);
 					n = true;
-					number[m] ++;
+					number[m]++;
 				} else {
 					var str = '.list' + m;
 					$(str).innerHTML = $(str).innerHTML + '<li>' + '<span class="imooc imooc_nav">' + '&#xf016;' + '</span>' + '<em>' + k + '</em>' + '<span class="imooc imooc_none">&#xf00d;</span>' + '</li>';
-					number[m] ++;
+					number[m]++;
 				}
+			}
+			if (j != 'define') {
+				chd.getElementsByTagName("em")[0].innerHTML = chd.getElementsByTagName("em")[0].innerHTML.split('(')[0];
+				chd.getElementsByTagName("em")[0].innerHTML += '(' + number[m] + ')';
 			}
 		}
 		m++;
 		n = false;
-		if (j != 'define') {
-			chd.getElementsByTagName("em")[0].innerHTML += '(' + number[m - 1] + ')';
-		}
+		if (key.hasOwnProperty(j)) size++;
 	}
 	tasksum.innerHTML = '(' + sum + ')';
-
 }
 
 function findDimensions() //函数：高度适应浏览器
-	{
-		var winHeight = 0;
-		if (window.innerHeight)
-			winHeight = window.innerHeight;
-		else if ((document.body) && (document.body.clientHeight))
-			winHeight = document.body.clientHeight;
-		//通过深入Document内部对body进行检测，获取窗口大小
-		if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
-			winHeight = document.documentElement.clientHeight;
-		}
-		var main = $("#main");
-		var sub = $("#sub");
-		var extra = $("#extra");
-		var layout = $("#body_layout");
-		layout.style.height = winHeight - 60 + 'px';
-		main.style.height = winHeight - 60 + 'px';
-		sub.style.height = winHeight - 60 + 'px';
-		extra.style.height = winHeight - 60 + 'px';
+{
+	var winHeight = 0;
+	if (window.innerHeight)
+		winHeight = window.innerHeight;
+	else if ((document.body) && (document.body.clientHeight))
+		winHeight = document.body.clientHeight;
+	//通过深入Document内部对body进行检测，获取窗口大小
+	if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth) {
+		winHeight = document.documentElement.clientHeight;
 	}
+	var main = $("#main");
+	var sub = $("#sub");
+	var extra = $("#extra");
+	var layout = $("#body_layout");
+	layout.style.height = winHeight - 60 + 'px';
+	main.style.height = winHeight - 60 + 'px';
+	sub.style.height = winHeight - 60 + 'px';
+	extra.style.height = winHeight - 60 + 'px';
+}
 
 addloadevent(showStorage);
 addloadevent(additems);
