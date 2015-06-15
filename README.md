@@ -1,13 +1,13 @@
 # task003
 ##任务三记录
 ***5.17提交第一次***
-收获分享：
+[收获分享]：
 1.本地存储
-localStorage的使用
-var storage = window.localStorage;
-storage.setItem("a",5);           //存储一个键值对
-storage.setItem('b',"running");   //修改一个键值
-storage.removeItem("c");          //清除c的值
+&nbsp;&nbsp;&nbsp;&nbsp;localStorage的使用
+&nbsp;&nbsp;&nbsp;&nbsp;var storage = window.localStorage;
+&nbsp;&nbsp;&nbsp;&nbsp;storage.setItem("a",5);           //存储一个键值对
+&nbsp;&nbsp;&nbsp;&nbsp;storage.setItem('b',"running");   //修改一个键值
+&nbsp;&nbsp;&nbsp;&nbsp;storage.removeItem("c");          //清除c的值
 
 function showStorage(){           //循环显示localStorage里的键值对
     for(var i=0;i<storage.length;i++){
